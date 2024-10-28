@@ -1,0 +1,46 @@
+import datetime
+import random
+from colorama import Fore, Back, Style
+
+def ping():
+    log("info", "Pong!", False)
+
+def selftest():
+    log("info", "Running selftest...", False)
+    for i in range(30):
+        randomchoice = random.randint(0,2)
+        if randomchoice == 0:
+            log("info", "Testing Info...", False)
+        elif randomchoice == 1:
+            log("warn", "Testing Warn...", False)
+        elif randomchoice == 2:
+            log("error", "Testing Error...", False)
+    log("info", "Selftest passed!", False)
+
+def log(logtype, message,kill):
+    output = ""
+    output += str(datetime.datetime.now())
+
+    if str(logtype) == "info":
+        output += " [INFO] "
+    elif str(logtype) == "warn":
+        output += " [WARN] "
+    elif str(logtype) == "error":
+        output += " [ERROR] "
+    elif str(logtype) == "fatal":
+        output += " [FATAL] "
+
+    output += str(message)
+    if str(logtype) == "info":
+        print(output)
+    elif str(logtype) == "warn":
+        print(Fore.YELLOW + output + Style.RESET_ALL)
+    elif str(logtype) == "error":
+        print(Fore.RED + output + Style.RESET_ALL)
+    elif str(logtype) == "fatal":
+        print(Fore.BLACK + Back.RED + output + Style.RESET_ALL)
+
+    if kill:
+        exit(0)
+
+selftest()
