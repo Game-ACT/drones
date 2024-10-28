@@ -42,5 +42,3 @@ def log(logtype, message,kill):
 
     if kill:
         exit(0)
-
-selftest()
